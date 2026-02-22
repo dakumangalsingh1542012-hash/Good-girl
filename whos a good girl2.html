@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>👀</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    color:white;
+    font-family:Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+    overflow:hidden;
+    flex-direction:column;
+}
+
+#text{
+    font-size:2rem;
+    margin-bottom:20px;
+}
+
+#countdown{
+    font-size:3rem;
+    font-weight:bold;
+}
+
+video{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div id="text">Make sure you have sound on for this website...</div>
+<div id="countdown">7</div>
+
+<video id="vid" playsinline>
+    <source src="WHOS%20A%20GOOD%20GIRL.mp4" type="video/mp4">
+</video>
+
+<audio id="sfx">
+    <source src="fahhhhh.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener("click", startExperience, { once: true });
+
+function startExperience(){
+
+    const text = document.getElementById("text");
+    const countdownEl = document.getElementById("countdown");
+    const video = document.getElementById("vid");
+    const sound = document.getElementById("sfx");
+
+    let count = 7;
+
+    const countdown = setInterval(() => {
+        count--;
+        countdownEl.innerHTML = count;
+
+        if(count <= 0){
+            clearInterval(countdown);
+
+            // Step 1: Did you click?
+            text.innerHTML = "Did you click on the link?";
+            countdownEl.style.display = "none";
+
+            // After 1 second: Yes you did!!
+            setTimeout(() => {
+                text.innerHTML = "Yes you did!!";
+
+                // After 2 more seconds: chaos
+                setTimeout(() => {
+                    text.style.display = "none";
+                    video.style.display = "block";
+
+                    video.play();
+                    sound.play();
+
+                }, 2000);
+
+            }, 1000);
+        }
+
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
